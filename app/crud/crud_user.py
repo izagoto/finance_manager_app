@@ -23,9 +23,7 @@ def get_all_users(db: Session):
 def create_user(db: Session, user: UserCreate):
     hashed_password = get_password_hash(user.password)
     db_user = User(
-        username=user.username,
-        email=user.email,
-        hashed_password=hashed_password
+        username=user.username, email=user.email, hashed_password=hashed_password
     )
     db.add(db_user)
     db.commit()
