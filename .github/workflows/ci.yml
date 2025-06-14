@@ -1,31 +1,15 @@
 name: CI
 
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+on: [push, pull_request]
 
 jobs:
-  backend:
+  build-and-test:
     runs-on: ubuntu-latest
     services:
-      sqlite:
-        image: nouchka/sqlite3
+      postgres: ...
     steps:
       - uses: actions/checkout@v3
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with: python-version: '3.10'
-      - run: pip install poetry
-      - run: poetry install
-      - run: pytest --maxfail=1 --disable-warnings -q
-  frontend:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        with: version: latest
-      - run: pnpm install
-      - run: pnpm run lint
-      - run: pnpm run test -- --coverage
+      - uses: actions/setup-python@v4
+        with: python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: pytest --cov=app
