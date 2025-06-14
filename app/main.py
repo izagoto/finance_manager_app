@@ -1,22 +1,51 @@
 from fastapi import FastAPI
-from app.db.session import engine, Base
-from app.models import user, transaction, investment
+from fastapi.responses import RedirectResponse
+from app.api.routes import auth, users, transactions, investments
+from app.db.base import Base
+from app.db.session import engine
 
-def create_tables():
-    Base.metadata.create_all(bind=engine)
+app = FastAPI(title="Finance Manager App")
 
-def create_app() -> FastAPI:
-    app = FastAPI(title="Finance Manager API")
+Base.metadata.create_all(bind=engine)
 
-    # Buat tabel saat aplikasi dimulai
-    @app.on_event("startup")
-    def startup_event():
-        create_tables()
+app.include_router(auth.router, prefix="/auth", tags=["Auth"])
+app.include_router(users.router, prefix="/users", tags=["Users"])
+app.include_router(transactions.router, prefix="/transactions", tags=["Transactions"])
+app.include_router(investments.router, prefix="/investments", tags=["Investments"])
 
-    @app.get("/")
-    def read_root():
-        return {"message": "Finance Manager API is running"}
 
-    return app
+@app.get("/")
+def home():
+    print("Redirecting to /docs")
+    return RedirectResponse(url="/docs")
 
-app = create_app()
+
+
+
+
+
+
+
+# from fastapi import FastAPI, Request
+# from fastapi.responses import HTMLResponse
+# from fastapi.templating import Jinja2Templates
+
+# from app.api.routes import auth, users, transactions, investments
+# from app.db.base import Base
+# from app.db.session import engine
+
+# app = FastAPI(title="Finance Manager App")
+
+# templates = Jinja2Templates(directory="templates")
+
+# Base.metadata.create_all(bind=engine)
+
+# @app.get("/", response_class=HTMLResponse)
+# def read_root(request: Request):
+#     return templates.TemplateResponse("index.html", {"request": request})
+
+# # Router
+# app.include_router(auth.router, prefix="/auth", tags=["Auth"])
+# app.include_router(users.router, prefix="/users", tags=["Users"])
+# app.include_router(transactions.router, prefix="/transactions", tags=["Transactions"])
+# app.include_router(investments.router, prefix="/investments", tags=["Investments"])

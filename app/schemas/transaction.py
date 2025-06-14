@@ -1,22 +1,23 @@
 from pydantic import BaseModel
 from typing import Optional
+from enum import Enum
 from datetime import datetime
+
+class TransactionType(str, Enum):
+    income = "income"
+    expense = "expense"
 
 class TransactionBase(BaseModel):
     amount: float
-    type: str
-    category: Optional[str]
-    description: Optional[str]
+    type: TransactionType
+    description: Optional[str] = None
 
 class TransactionCreate(TransactionBase):
     pass
 
-class TransactionUpdate(TransactionBase):
-    pass
-
-class TransactionInDB(TransactionBase):
+class TransactionOut(TransactionBase):
     id: int
-    date: datetime
+    timestamp: datetime
     user_id: int
 
     class Config:

@@ -1,21 +1,25 @@
 from pydantic import BaseModel
 from typing import Optional
+from enum import Enum
 from datetime import datetime
+
+class InvestmentType(str, Enum):
+    stock = "stock"
+    crypto = "crypto"
+    property = "property"
+    other = "other"
 
 class InvestmentBase(BaseModel):
     name: str
     amount: float
-    return_rate: Optional[float] = 0.0
+    type: InvestmentType
 
 class InvestmentCreate(InvestmentBase):
     pass
 
-class InvestmentUpdate(InvestmentBase):
-    pass
-
-class InvestmentInDB(InvestmentBase):
+class InvestmentOut(InvestmentBase):
     id: int
-    date: datetime
+    timestamp: datetime
     user_id: int
 
     class Config:
