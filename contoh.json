@@ -5,6 +5,7 @@
         {
             "id": 1,
             "username": "admin",
+            "full_name": "admin ajah",
             "email": "id.admin@gmail.com",
             "is_active": true,
             "is_admin": false
