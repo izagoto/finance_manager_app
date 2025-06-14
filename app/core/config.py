@@ -1,5 +1,3 @@
-# backend/app/core/config.py
-
 from pydantic import BaseSettings
 from typing import List
 
