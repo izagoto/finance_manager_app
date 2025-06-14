@@ -1,7 +1,9 @@
-from fastapi import APIRouter, Depends, Body
+from fastapi import APIRouter, Depends, HTTPException, Body
 from sqlalchemy.orm import Session
 from app.crud import crud_user
 from app.api.deps import get_db
+from app.api.deps import get_current_user
+from app.models.user import User
 
 router = APIRouter()
 
@@ -32,7 +34,9 @@ def create_user(username: str = Body(...), email: str = Body(...), password: str
         return {"status": 500, "message": f"Internal Server Error: {str(e)}", "data": None}
 
 @router.get("/get-all-users/")
-def get_users(db: Session = Depends(get_db)):
+def get_users(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    if not current_user.is_admin:
+        raise HTTPException(status_code=403, detail="Admin only")
     try:
         users = crud_user.get_all_users(db)
         return {
@@ -52,7 +56,6 @@ def get_users(db: Session = Depends(get_db)):
             "message": f"Internal Server Error: {str(e)}",
             "data": None
         }
-
 
 @router.get("/get-users-by/{user_id}")
 def get_user(user_id: int, db: Session = Depends(get_db)):
