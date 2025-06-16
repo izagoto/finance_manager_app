@@ -4,6 +4,43 @@ Aplikasi manajemen keuangan pribadi dan tim dengan fitur lengkap untuk mencatat 
 
 ---
 
+## ✅ TO DO - Finance Management App
+
+### 🔐 Fitur Autentikasi & Manajemen Pengguna
+
+- ✅ Login dengan JWT
+- ✅ Logout dengan token blacklist
+- ✅ Token decoding untuk autentikasi pengguna
+- ✅ Role-based Access Control: Admin & User
+- ✅ CRUD User (oleh Admin)
+
+### 💸 Fitur Keuangan (Pemasukan, Pengeluaran, Investasi)
+
+- 🚧 Input Pemasukan
+- 🚧 Riwayat dan detail Pemasukan
+- 🚧 Input Pengeluaran
+- 🚧 Riwayat dan detail Pengeluaran
+- 🚧 Input & Manajemen Investasi
+- 🚧 Riwayat dan laporan Investasi
+- 🚧 Dashboard Ringkasan Keuangan
+- 🚧 Grafik interaktif pemasukan/pengeluaran/investasi
+
+### 📤 Ekspor Data & Laporan
+
+- 🚧 Ekspor transaksi ke PDF
+- 🚧 Ekspor transaksi ke Excel
+- 🚧 Filter transaksi berdasarkan tanggal, kategori, dan jenis transaksi
+- 🚧 Fitur pencarian berdasarkan nama transaksi, deskripsi, atau kategori
+
+### 🖥️ UI & UX
+
+- 🚧 Tampilan responsif untuk desktop dan mobile (React + Bootstrap)
+- 🚧 Navigasi antar halaman yang intuitif
+- 🚧 Formulir validasi dan pesan kesalahan
+- 🚧 Notifikasi sukses/gagal (toast/alert)
+
+---
+
 ## 🚀 Fitur Utama
 
 - ✅ Autentikasi dan otorisasi (Login, Logout, Token JWT)
