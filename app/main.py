@@ -1,23 +1,29 @@
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
-from app.api.routes import auth
-from app.models import models
-from app.db import engine
 from app.api.routes.main_routes import router
+from app.db.database import init_db
+from fastapi.middleware.cors import CORSMiddleware
 
-models.Base.metadata.create_all(bind=engine)
+init_db()
 
 app = FastAPI(
-    title="Finance Management App",
-    description="API for personal finance management including income, expenses, investments, and more.",
-    version="1.0.0",
-    docs_url="/docs",
-    redoc_url="/redoc",
+    title="Finance Managements APP",
+    version="1.0",
+    description="API untuk finance management app",
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.include_router(router)
 
 
-@app.get("/", include_in_schema=False)
+@app.get("/")
 def home():
+    print("Redirecting to /docs")
     return RedirectResponse(url="/docs")

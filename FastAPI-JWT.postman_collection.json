@@ -1,0 +1,64 @@
+{
+    "info": {
+      "name": "FastAPI JWT Auth",
+      "_postman_id": "a1b2c3d4-e5f6-7890-abcd-1234567890ef",
+      "description": "Collection for FastAPI JWT Auth API",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Create_user",
+        "request": {
+          "method": "POST",
+          "header": [{ "key": "Content-Type", "value": "application/json" }],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"username\": \"testuser\",\n  \"email\": \"test@example.com\",\n  \"password\": \"testpass\"\n}"
+          },
+          "url": {
+            "raw": "http://localhost:8000/auth/create-user",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "8000",
+            "path": ["auth", "create-user"]
+          }
+        }
+      },
+      {
+        "name": "Login",
+        "request": {
+          "method": "POST",
+          "header": [{ "key": "Content-Type", "value": "application/x-www-form-urlencoded" }],
+          "body": {
+            "mode": "urlencoded",
+            "urlencoded": [
+              { "key": "username", "value": "testuser" },
+              { "key": "password", "value": "testpass" }
+            ]
+          },
+          "url": {
+            "raw": "http://localhost:8000/api/token",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "8000",
+            "path": ["auth", "token"]
+          }
+        }
+      },
+      {
+        "name": "Decode Token",
+        "request": {
+          "method": "GET",
+          "url": {
+            "raw": "http://localhost:8000/auth/decode?token={{token}}",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "8000",
+            "path": ["auth", "decode"],
+            "query": [{ "key": "token", "value": "{{token}}" }]
+          }
+        }
+      }
+    ]
+  }
+  

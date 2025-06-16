@@ -9,6 +9,8 @@ __pycache__/
 *.pyo
 *$py.class
 
+alembic/
+
 *.db
 *.sqlite3
 

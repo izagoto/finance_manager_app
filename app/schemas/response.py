@@ -1,12 +1,9 @@
-from typing import Generic, TypeVar, Optional
 from pydantic import BaseModel
+from typing import List, Optional, Union
+from app.schemas.user import UserOut
 
-T = TypeVar("T")
 
-
-class ResponseSchema(BaseModel, Generic[T]):
+class ResponseSchema(BaseModel):
     status: int
     message: str
-    data: Optional[T] = None
-
-    model_config = {"from_attributes": True}
+    data: Optional[Union[List[UserOut], dict, None]] = None
