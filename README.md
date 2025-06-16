@@ -1,6 +1,6 @@
 ### 💰 Finance Management App
 
-Aplikasi manajemen keuangan pribadi dan tim dengan fitur lengkap untuk mencatat **pemasukan**, **pengeluaran**, **investasi**, serta **dashboard analitik**, dan **ekspor laporan ke PDF dan Excel**. Admin juga dapat mengelola pengguna dan peran.
+Aplikasi manajemen keuangan pribadi dengan fitur lengkap untuk mencatat **pemasukan**, **pengeluaran**, **investasi**, serta **dashboard analitik**, dan **ekspor laporan ke PDF dan Excel**. Admin juga dapat mengelola pengguna dan peran.
 
 ---
 
