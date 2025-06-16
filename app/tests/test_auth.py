@@ -3,7 +3,6 @@ from app.main import app
 
 client = TestClient(app)
 
-# Data user lengkap sesuai dengan UserCreate
 test_user = {
     "username": "unittestuser",
     "full_name": "Unit Test",
@@ -12,14 +11,14 @@ test_user = {
     "role": "user",
 }
 
-access_token = None  # global token
+access_token = None
 
 
 def test_create_user():
     response = client.post("/api/create-user", json=test_user)
     json_data = response.json()
     print("CREATE USER:", json_data)
-    assert response.status_code in [200, 400]  # 400 jika sudah terdaftar
+    assert response.status_code in [200, 400]
 
 
 def test_login_user():

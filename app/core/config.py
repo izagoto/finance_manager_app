@@ -8,14 +8,12 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
     PRODUCTION: bool = False
 
-    BASE_DIR: Path
+    BASE_DIR: Path = Path(__file__).resolve().parent.parent.parent
     DB_PATH: Path | None = None
     DATABASE_URL: str = ""
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        if not self.BASE_DIR:
-            raise ValueError("BASE_DIR tidak ditemukan di .env")
 
         if not self.DB_PATH:
             self.DB_PATH = self.BASE_DIR / "finance.db"
