@@ -102,4 +102,4 @@ Proyek ini dirilis dengan lisensi MIT. Bebas digunakan dan dimodifikasi sesuai k
 
 ## ✨ Kontribusi
 
-Pull request dan issue sangat dipersilakan! Jangan lupa beri ⭐ jika kamu suka proyek ini 😄
+Pull request dipersilakan! Jangan lupa beri ⭐ jika kamu suka proyek ini 😄
