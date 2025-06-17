@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Request, HTTPException
+from fastapi import APIRouter, Depends, Request
 from fastapi.responses import JSONResponse
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
@@ -29,14 +29,34 @@ def login(
         db_user = crud_user.get_user_by_username(db, form_data.username)
 
         if not db_user:
-            raise HTTPException(status_code=401, detail="Invalid username or password")
+            return JSONResponse(
+                status_code=401,
+                content={
+                    "status": 401,
+                    "message": "Invalid username or password",
+                },
+            )
+
+        if not getattr(db_user, "is_active", False):
+            return JSONResponse(
+                status_code=403,
+                content={
+                    "status": 403,
+                    "message": "Account is inactive",
+                },
+            )
 
         hashed_password = getattr(db_user, "hashed_password", None)
-
         if not hashed_password or not verify_password(
             form_data.password, hashed_password
         ):
-            raise HTTPException(status_code=401, detail="Invalid username or password")
+            return JSONResponse(
+                status_code=401,
+                content={
+                    "status": 401,
+                    "message": "Invalid username or password",
+                },
+            )
 
         token = create_access_token(data={"sub": db_user.username})
 
@@ -65,7 +85,6 @@ def login(
             content={
                 "status": 500,
                 "message": "Internal server error",
-                "data": None,
             },
         )
 
